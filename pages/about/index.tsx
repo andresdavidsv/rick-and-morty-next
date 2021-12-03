@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 export const About = () => {
   return (
     <div>
-      <h1>About</h1>
+      <p>About</p>
     </div>
   )
 }
