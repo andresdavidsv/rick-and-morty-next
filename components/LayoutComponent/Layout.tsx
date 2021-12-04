@@ -4,13 +4,9 @@ import Footer from '@components/FooterComponent/Footer';
 
 const Layout:React.FC = ({children}) => {
   return (
-    <div>
+    <div className="app">
       <Navbar />
-        <div className="app">
-          <main>
-            {children}
-          </main>
-        </div>
+        {children}
       <Footer />
     </div>
   )

@@ -1,16 +1,94 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+
+import { gql, useQuery } from '@apollo/client';
+import Loading from '@components/LoadingComponent/Loading';
+import Search from '@components/SearchComponent/Search';
+
+const GET_CHARACTERS = gql`
+  query getCharactersQuery($page: Int){
+    characters(page: $page){
+      info {
+          next
+        }
+      results{
+        id
+        name
+        status
+        species
+        image
+      }
+    }
+  }
+`
 
 const Home = () => {
+  const [hasNextPage, setHasNextPage] = useState(true);
+  const [page, setPage] = useState(2);
+  const { data, loading, error, fetchMore } = useQuery(GET_CHARACTERS);
+  if (loading) {
+    return <Loading/>;
+  }
+  if (error) {
+    return null;
+  }
   return (
-    <div className="bg-gray-50">
-      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
-        <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-          <span className="block">Rick And Morty</span>
-          <span className="block text-indigo-600">
-            API
-          </span>
-        </h2>
+    <div className="p-10">
+      <Search />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {data.characters.results.map((character) => (
+          <Link key={character.id} href="/characters/[character.id]" as={`/characters/${character.id}`} passHref>
+            <div className={`card m-2 cursor-pointer bg-gray-100 border rounded-lg hover:shadow-md hover:border-opacity-0 transform hover:-translate-y-1 transition-all duration-200
+            ${character.status === 'Alive' ? 'border-green-200' : 'border-red-500 '}`}>
+              <div className="m-3">
+                <h2 className="text-lg mb-2">
+                  {character.name}
+                  <span className="text-sm text-teal-800 font-mono bg-teal-100 inline rounded-full px-2 align-top float-right animate-pulse">
+                    {character.species}
+                  </span>
+                </h2>
+                <div className="w-full">
+                  <Image
+                    src={character.image}
+                    alt={character.name}
+                    width={500}
+                    height={500}
+                  />
+                </div>
+              </div>
+            </div>
+          </Link>
+        ))}
       </div>
+      {hasNextPage ? (
+        <div className="flex justify-center">
+          <button
+            className="px-4 py-2 bg-blue-500 text-white rounded my-10"
+            onClick={() => {
+              fetchMore({
+                variables: { page },
+                updateQuery: (prevResult, { fetchMoreResult }) => {
+                  fetchMoreResult.characters.results = [
+                    ...prevResult.characters.results,
+                    ...fetchMoreResult.characters.results,
+                  ];
+                  const { next } = fetchMoreResult.characters.info;
+                  setPage(next);
+                  setHasNextPage(next);
+                  return fetchMoreResult;
+                }
+              });
+            }}
+          >
+            More Characters
+          </button>
+        </div>
+        ) : (
+          <p className="my-10 text-center font-medium">
+            Youve reached the end!{" "}
+          </p>
+        )}
     </div>
   )
 }

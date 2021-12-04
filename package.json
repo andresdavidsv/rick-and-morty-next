@@ -12,7 +12,10 @@
   "author": "Andres David Solarte Vidal",
   "license": "ISC",
   "dependencies": {
+    "@apollo/client": "^3.5.5",
+    "@heroicons/react": "^1.0.5",
     "@tailwindcss/typography": "^0.4.1",
+    "graphql": "^16.0.1",
     "next": "^12.0.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
