@@ -2,23 +2,11 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import Loading from '@components/LoadingComponent/Loading';
 
-const GET_EPISODE = gql`
-  query getEpisodeQuery($id: ID!){
-    episode(id: $id){
-      id
-      name
-      episode
-      air_date
-      characters {
-        id
-        name
-      }
-    }
-  }
-`
+// Services
+import { GET_EPISODE } from '../../services/index';
 
 const EpisodeItem = () => {
   const { query: { episodeId } } = useRouter();
@@ -63,7 +51,7 @@ const EpisodeItem = () => {
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                 {data.episode.characters.map((character) => (
                   <Link key={character.id} href="/characters/[character.id]" as={`/characters/${character.id}`} passHref>
-                    <span className={`inline-block text-white-700 rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2 bg-white`}>
+                    <span className={`inline-block text-white-700 rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2 bg-white cursor-pointer`}>
                       {character.name}
                     </span>
                   </Link>

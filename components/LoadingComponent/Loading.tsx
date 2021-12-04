@@ -2,7 +2,7 @@ import React from 'react'
 
 const Loading = () => {
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center m-20">
     <div
       className="
         animate-spin

@@ -4,32 +4,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { BeakerIcon, CameraIcon, FingerPrintIcon, FlagIcon, MapIcon } from '@heroicons/react/solid';
 
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import Loading from '@components/LoadingComponent/Loading';
 
-const GET_CHARACTER = gql`
-  query getCharacterQuery($id: ID!){
-    character(id: $id){
-      id
-      name
-      status
-      species
-      gender
-      origin {
-        name
-        dimension
-      }
-      location {
-        name
-      }
-      episode {
-        id
-        name
-      }
-      image
-    }
-  }
-`
+// Services
+import { GET_CHARACTER } from '../../services/index';
 
 const CharacterItem = () => {
   const { query: { characterId } } = useRouter();
@@ -50,7 +29,7 @@ const CharacterItem = () => {
   }
 
   return (
-    <div>
+    <div className="container mx-auto my-auto mr-6">
       <div className="px-4 py-16 mx-4 sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
       <div className="grid gap-12 row-gap-8 lg:grid-cols-2">
         <div className="flex flex-col justify-center">
@@ -104,7 +83,7 @@ const CharacterItem = () => {
                   <CameraIcon className="h-5 w-5 text-blue-500" />
                 </div>
               <Link href="/episodes/[episodeRandomId]" as={`/episodes/${episodeRandomId}`} passHref>
-              <h6 className="my-3 font-semibold leading-5 truncate">
+              <h6 className="my-3 font-semibold leading-5 truncate cursor-pointer">
                     {data.character.episode[randomNumber].name}
               </h6>
               </Link>

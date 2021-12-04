@@ -2,40 +2,31 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import Loading from '@components/LoadingComponent/Loading';
-import Search from '@components/SearchComponent/Search';
+import { useRouter } from 'next/router';
 
-const GET_CHARACTERS = gql`
-  query getCharactersQuery($page: Int){
-    characters(page: $page){
-      info {
-          next
-        }
-      results{
-        id
-        name
-        status
-        species
-        image
-      }
-    }
-  }
-`
+//Services
+import {GET_CHARACTERS} from '../services/index';
 
 const Home = () => {
   const [hasNextPage, setHasNextPage] = useState(true);
   const [page, setPage] = useState(2);
-  const { data, loading, error, fetchMore } = useQuery(GET_CHARACTERS);
+  const { query: { name } } = useRouter();
+  const { data, loading, error, fetchMore } = useQuery(GET_CHARACTERS, {
+    variables: {
+      name: name
+    }
+  });
   if (loading) {
     return <Loading/>;
   }
   if (error) {
     return null;
   }
+
   return (
     <div className="p-10">
-      <Search />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {data.characters.results.map((character) => (
           <Link key={character.id} href="/characters/[character.id]" as={`/characters/${character.id}`} passHref>
@@ -68,7 +59,7 @@ const Home = () => {
             onClick={() => {
               fetchMore({
                 variables: { page },
-                updateQuery: (prevResult, { fetchMoreResult }) => {
+                updateQuery: (prevResult:any, { fetchMoreResult }:any) => {
                   fetchMoreResult.characters.results = [
                     ...prevResult.characters.results,
                     ...fetchMoreResult.characters.results,

@@ -15,12 +15,10 @@ const Footer = () => {
           </Link>
           <div className="mt-6 lg:max-w-sm">
             <p className="text-sm text-gray-800">
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam.
+              Hi there, I´m Andrés David | @andresdavidsv 👋
             </p>
             <p className="mt-4 text-sm text-gray-800">
-              Eaque ipsa quae ab illo inventore veritatis et quasi architecto
-              beatae vitae dicta sunt explicabo.
+              Im a Father, Electronic Engineer, and Software Engineer!
             </p>
           </div>
         </div>
@@ -62,8 +60,7 @@ const Footer = () => {
             </Link>
           </div>
           <p className="mt-4 text-sm text-gray-500">
-            Bacon ipsum dolor amet short ribs pig sausage prosciutto chicken
-            spare ribs salami.
+            You can contact me at the data left here.
           </p>
         </div>
       </div>
