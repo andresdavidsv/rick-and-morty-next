@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Search from '@components/SearchComponent/Search';
 
 const Navbar = () => {
   const router = useRouter();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [name, setName] = useState('');
   const handleName = (name) => {
-    setName(name);
     router.push({
       pathname: '/',
       query: { name },

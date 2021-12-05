@@ -7,19 +7,25 @@ import Loading from '@components/LoadingComponent/Loading';
 import { useRouter } from 'next/router';
 
 //Services
-import { GET_CHARACTERS } from '../services/index';
+import { GET_CHARACTERS } from '@services/index';
+
+//Interfaces
+import { Characters } from '@interfaces/Characters';
 
 const Home = () => {
-  const [hasNextPage, setHasNextPage] = useState(true);
-  const [page, setPage] = useState(2);
+  const [hasNextPage, setHasNextPage] = useState<boolean>(true);
+  const [page, setPage] = useState<number>(42);
   const {
     query: { name },
   } = useRouter();
-  const { data, loading, error, fetchMore } = useQuery(GET_CHARACTERS, {
-    variables: {
-      name: name,
-    },
-  });
+  const { data, loading, error, fetchMore } = useQuery<Characters>(
+    GET_CHARACTERS,
+    {
+      variables: {
+        name: name,
+      },
+    }
+  );
   if (loading) {
     return <Loading />;
   }
@@ -72,14 +78,14 @@ const Home = () => {
             onClick={() => {
               fetchMore({
                 variables: { page },
-                updateQuery: (prevResult: any, { fetchMoreResult }: any) => {
+                updateQuery: (prevResult, { fetchMoreResult }) => {
                   fetchMoreResult.characters.results = [
                     ...prevResult.characters.results,
                     ...fetchMoreResult.characters.results,
                   ];
                   const { next } = fetchMoreResult.characters.info;
                   setPage(next);
-                  setHasNextPage(next);
+                  !next ? setHasNextPage(false) : '' ;
                   return fetchMoreResult;
                 },
               });
