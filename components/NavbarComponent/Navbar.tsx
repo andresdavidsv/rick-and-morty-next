@@ -1,31 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Search from '@components/SearchComponent/Search';
 
 const Navbar = () => {
   const router = useRouter();
-  const [name, setName] = useState('');
   const handleName = (name) => {
-    setName(name);
     router.push({
       pathname: '/',
-      query: { name }
+      query: { name },
     });
-  }
+  };
   return (
     <div className="bg-gray-900">
       <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
         <div className="relative flex items-center justify-between">
           <Link href="/">
-          <a className="inline-flex items-center">
-            <span className="ml-2 text-sm font-bold tracking-wide text-gray-100 uppercase">
-              andresdavidsv
-            </span>
-          </a>
+            <a className="inline-flex items-center">
+              <span className="ml-2 text-sm font-bold tracking-wide text-gray-100 uppercase">
+                andresdavidsv
+              </span>
+            </a>
           </Link>
           <div className="hidden md:block">
-            <Search handleName={handleName}/>
+            <Search handleName={handleName} />
           </div>
           <ul className="flex items-center space-x-8 lg:flex">
             <li>
@@ -49,4 +47,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar
+export default Navbar;
