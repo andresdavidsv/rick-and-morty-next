@@ -1,5 +1,9 @@
 import React from 'react';
-import { AcademicCapIcon, LightningBoltIcon, BriefcaseIcon } from '@heroicons/react/outline';
+import {
+  AcademicCapIcon,
+  LightningBoltIcon,
+  BriefcaseIcon,
+} from '@heroicons/react/outline';
 const features = [
   {
     name: 'Next.Js',
@@ -18,8 +22,8 @@ const features = [
     description:
       'GraphQLs essential objective is to offer clients a more direct, simple and efficient way to obtain exactly the data they require, through a powerful and dynamic protocol.',
     icon: LightningBoltIcon,
-  }
-]
+  },
+];
 
 export const About = () => {
   return (
@@ -33,7 +37,8 @@ export const About = () => {
             Applying new knowledge.
           </p>
           <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-            Application made in NextJs, to consume the Riack and Morty api of Graphql.
+            Application made in NextJs, to consume the Riack and Morty api of
+            Graphql.
           </p>
         </div>
 
@@ -58,7 +63,7 @@ export const About = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default About;
