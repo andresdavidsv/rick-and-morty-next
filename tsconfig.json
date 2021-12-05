@@ -2,7 +2,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["components/*"]
+      "@components/*": ["components/*"],
+      "@services/*": ["services/*"],
+      "@interfaces/*": ["interfaces/*"]
     },
     "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],

@@ -14,13 +14,16 @@ import { useQuery } from '@apollo/client';
 import Loading from '@components/LoadingComponent/Loading';
 
 // Services
-import { GET_CHARACTER } from '../../services/index';
+import { GET_CHARACTER } from '@services/index';
+
+//Interfaces
+import { CharacterItem } from '@interfaces/Characters';
 
 const CharacterItem = () => {
   const {
     query: { characterId },
   } = useRouter();
-  const { data, loading, error } = useQuery(GET_CHARACTER, {
+  const { data, loading, error } = useQuery<CharacterItem>(GET_CHARACTER, {
     variables: { id: characterId },
   });
   let episodeRandomId;

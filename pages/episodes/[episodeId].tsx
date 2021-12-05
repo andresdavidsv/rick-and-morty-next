@@ -6,13 +6,16 @@ import { useQuery } from '@apollo/client';
 import Loading from '@components/LoadingComponent/Loading';
 
 // Services
-import { GET_EPISODE } from '../../services/index';
+import { GET_EPISODE } from '@services/index';
+
+//Interfaces
+import { EpisodeItem } from '@interfaces/Characters';
 
 const EpisodeItem = () => {
   const {
     query: { episodeId },
   } = useRouter();
-  const { data, loading, error } = useQuery(GET_EPISODE, {
+  const { data, loading, error } = useQuery<EpisodeItem>(GET_EPISODE, {
     variables: { id: episodeId },
   });
   if (loading) {
