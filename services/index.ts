@@ -1,12 +1,12 @@
 import { gql } from '@apollo/client';
 
 const GET_CHARACTERS = gql`
-  query getCharactersQuery($page: Int, $name: String){
-    characters(page: $page, filter: { name: $name }){
+  query getCharactersQuery($page: Int, $name: String) {
+    characters(page: $page, filter: { name: $name }) {
       info {
-          next
-        }
-      results{
+        next
+      }
+      results {
         id
         name
         status
@@ -15,10 +15,10 @@ const GET_CHARACTERS = gql`
       }
     }
   }
-`
+`;
 const GET_CHARACTER = gql`
-  query getCharacterQuery($id: ID!){
-    character(id: $id){
+  query getCharacterQuery($id: ID!) {
+    character(id: $id) {
       id
       name
       status
@@ -38,11 +38,11 @@ const GET_CHARACTER = gql`
       image
     }
   }
-`
+`;
 
 const GET_EPISODE = gql`
-  query getEpisodeQuery($id: ID!){
-    episode(id: $id){
+  query getEpisodeQuery($id: ID!) {
+    episode(id: $id) {
       id
       name
       episode
@@ -53,6 +53,6 @@ const GET_EPISODE = gql`
       }
     }
   }
-`
+`;
 
 export { GET_CHARACTERS, GET_CHARACTER, GET_EPISODE };
