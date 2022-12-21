@@ -16,6 +16,7 @@ const GET_CHARACTERS = gql`
     }
   }
 `;
+
 const GET_CHARACTER = gql`
   query getCharacterQuery($id: ID!) {
     character(id: $id) {
